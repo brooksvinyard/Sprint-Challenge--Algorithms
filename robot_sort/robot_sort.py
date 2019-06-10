@@ -91,13 +91,220 @@ class SortingRobot:
         Returns True if the robot's light is on and False otherwise.
         """
         return self._light == "ON"
+    
+    def go_to_beginning(self):
+        """
+        Helper function to send the robot to the beginning of the list
+        """
+        while self.can_move_left() is True:
+            self.move_left()
+        return True
 
     def sort(self):
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+
+        # print("Position1:",self._position)
+        # print("holding:",self._item)
+        # print(self._list)
+
+        # print("\ngrab first item", self.swap_item())
+        # print("holding:",self._item)
+        # print("move right", self.move_right())
+        # print("compare:", self.compare_item())
+        # print(self._list)
+
+
+
+        # print("\n-1 so curent item smaller than compare so go left : swap : go right")
+        # print("go left", self.move_left())
+        # print("Position:",self._position)
+        # # print("compare:", self.compare_item())
+        # print("holding:",self._item)
+        # print("drop first item", self.swap_item())
+        # print("holding:",self._item)
+        # print("Position:",self._position)
+        # # print("compare:", self.compare_item())
+        # print("move right", self.move_right())
+        # print("Position:",self._position)
+        # print(self._list)
+
+
+
+        # print("\ngrab second item", self.swap_item())
+        # print("holding:",self._item)
+        # print("move right", self.move_right())
+        # print("compare:", self.compare_item())
+        # print(self._list)
+
+
+        # print("\n1 so curent item bigger than compare: swap : go right")
+        # print("Position:",self._position)
+        # print("holding:",self._item)
+        # print("swap", self.swap_item()) # Grab for smaller item
+        # print("go left", self.move_left())
+        # print("swap", self.swap_item()) # Drop smaller item
+        # print("holding:",self._item)
+        # print("go right", self.move_right())
+        # print(self._list)
+
+        # print("\ngrab third item", self.swap_item())
+        # print("holding:",self._item)
+        # print("move right", self.move_right())
+        # print("compare:", self.compare_item())
+        # print(self._list)
+
+
+        # print("\n-1 so curent item smaller than compare so go left : swap : go right")
+        # print("go left", self.move_left())
+        # print("Position:",self._position)
+        # print("holding:",self._item)
+        # print("drop first item", self.swap_item())
+        # print("holding:",self._item)
+        # print("Position:",self._position)
+        # print("move right", self.move_right())
+        # print("Position:",self._position)
+        # print(self._list)
+
+
+        # print("\ngrab next item", self.swap_item())
+        # print("holding:",self._item)
+        # print("move right", self.move_right())
+        # print("compare:", self.compare_item())
+        # print(self._list)
+
+        # print("\n******************************************************************************")
+        # print("**************************")
+        print("Running...")
+
+        self.swap_item()
+        self.move_right()
+
+
+        while True:
+            # print(self._list)
+            # self.swap_item()
+            # self.move_right()
+            # print("\n**************************")
+            # print("while true")
+            # print("Position:",self._position)
+            # print("light on?", self.light_is_on())
+            # print("compare:", self.compare_item())
+            # print("holding:",self._item)
+            # print(self._list)
+
+            # If we reach the end of the list:
+            # Either everything is sorted, or we need to restart
+            # If the light is on, everythign is sorted
+            if self.can_move_right() is False:
+                # print("end of the list")
+                # print("Position:",self._position)
+                # print("light on?", self.light_is_on())
+                # print("holding:",self._item)
+
+                # self.swap_item() #drop item
+
+                if self.light_is_on() is True:
+                    self.move_left()
+                    self.swap_item()
+                    print("everything is sorted")
+                    print(self._list)
+                    return 
+
+                elif self.compare_item() == 1:
+                    self.set_light_on()
+                    self.swap_item() #drop item
+                    self.move_left()
+                    self.swap_item() #drop item
+                    self.go_to_beginning()
+                    self.swap_item()
+                    self.move_right()
+
+                elif self.compare_item() == -1:
+                    self.set_light_on()
+                    self.move_left()
+                    self.swap_item() #drop item
+                    self.go_to_beginning()
+                    self.swap_item()
+                    self.move_right()
+                
+                elif self.compare_item() == 0:
+                    self.set_light_on()
+                    self.move_left()
+                    self.swap_item() #drop item
+                    self.go_to_beginning()
+                    self.swap_item()
+                    self.move_right()
+
+            if self.compare_item() == -1:
+                # print("\n-1 so curent item smaller than compare so go left : swap : go right : pick up")
+                # print("go left")
+                self.move_left()
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("drop first item")
+                self.swap_item()
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("move right")
+                self.move_right()
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("pick up larger item")
+                self.swap_item()
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("move right")
+                self.move_right()
+                # print("Position:",self._position, "holding:",self._item)
+                # print(self._list)
+
+            if self.compare_item() == 0:
+                # print("Item same: move right")
+                self.move_left() 
+                self.swap_item()
+                self.move_right()
+                self.swap_item()
+                self.move_right()
+                # print("Position:",self._position)
+
+
+            if self.compare_item() == 1:
+                self.set_light_off() # turn light off if there is work to do
+                # print("\n1 so curent item bigger than compare: swap : go right: turn light off")
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("swap")
+                self.swap_item() # Grab for smaller item
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("go left")
+                self.move_left()
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("drop item")
+                self.swap_item()
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("go right") 
+                self.move_right()
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("pick up larger item")
+                self.swap_item() # grab bigger item
+                # print("Position:",self._position, "holding:",self._item)
+
+                # print("move right")
+                self.move_right()
+                # print("Position:",self._position, "holding:",self._item)
+                # print(self._list)
+
+
+
+        print("End of the line")
+        
+        return self._list
 
 
 if __name__ == "__main__":
